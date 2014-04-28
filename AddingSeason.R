@@ -9,13 +9,13 @@ Depart.Delay <- flights %.%
 #(Spring, Summer, Fall, Winter)
 Seasons <- function(months){
   season = "Winter"
-  if(month > 3 && month < 6){
+  if(months > 3 && months < 6){
     season = "Spring"
   }
-  else if(month >5 && month < 9){
+  else if(months >5 && months < 9){
     season = "Summer"
   }
-  else if(month > 8 && month < 12){
+  else if(months > 8 && months < 12){
     season ="Fall"
   }
   else {

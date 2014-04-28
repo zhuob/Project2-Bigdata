@@ -24,6 +24,13 @@ Seasons <- function(months){
   return(season) 
 }
 
+#This may need to be modified, since I don't think that
+#my function can handel a vector
 Depart.Delay_Seasons <- Depart.Delay %.%
   mutate(Season = Seasons(Month)) %.%
+  group_by(Season)
+
+#It may need to be used this way
+Depart.Delay_Seasons <- Depart.Delay %.%
+  mutate(Season = lapply(Month, Seasons)) %.%
   group_by(Season)

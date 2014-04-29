@@ -8,6 +8,7 @@
 
 
 library(dplyr)
+library(RPostgreSQL)  #added by Feifei
 
 endpoint <- "flights.cwick.co.nz"
 user <- "student"
@@ -17,5 +18,5 @@ ontime <- src_postgres("ontime", host = endpoint, port = 5432,
                       user = user, password = password)
 
 flight = tbl(ontime, "flights")
-as.tbl(head(flights))
+as.tbl(head(flight))
 

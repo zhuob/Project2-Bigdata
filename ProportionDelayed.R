@@ -1,6 +1,5 @@
 Prop.Delay <- Depart.Delay %.%
-  mutate(delayed = as.integer(depdelay > 0)) %.%
-  summarise(props = mean(delayed)) %.%
+  summarise(props = mean(as.integer(depdelay > 0)) %.%
   arrange(desc(props))
   
 explain(Prop.Delay)

@@ -24,6 +24,11 @@ Seasons <- function(months){
   return(season) 
 }
 
+season.vec = c("Winter", "Winter", "Winter", "Spring", "Spring",
+              "Summer", "Summer", "Summer", "Fall", "Fall", "Fall",
+              "Winter")
+length(season.vec)
+
 #This may need to be modified, since I don't think that
 #my function can handel a vector
 Depart.Delay_Seasons <- Depart.Delay %.%
@@ -33,4 +38,9 @@ Depart.Delay_Seasons <- Depart.Delay %.%
 #It may need to be used this way
 Depart.Delay_Seasons <- Depart.Delay %.%
   mutate(Season = lapply(Month, Seasons)) %.%
+  group_by(Season)
+
+#A faster commmand and function may be
+Depart.Delay_Seasons <- Depart.Delay %.%
+  mutate(Season=season.vec[Month]) %.%
   group_by(Season)

@@ -2,8 +2,8 @@
 #Then, we need it organized by the Origin (Airport), the Year,
 #the Month, the Day of the  Month. 
 Depart.Delay <- flights %.% 
-  select(year, month, dayOfWeek, depDelay) %.%
-  group_by(Origin)
+  select(year, month, dayofweek, depdelay) %.%
+  group_by(origin)
 
 #We can then add a column, which an be for season. 
 #(Spring, Summer, Fall, Winter)

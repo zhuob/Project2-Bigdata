@@ -62,6 +62,7 @@ write.table(Spring.Delay_Data, file="SpringPop.csv", sep=",",
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
+Spring.Delay_Data <- read.csv("SpringPop.csv", header=TRUE)
 arrange(Spring.Delay_Data, desc(props))
 
 #Summer is considered June, July, and August
@@ -84,6 +85,7 @@ write.table(Summer.Delay_Data, file="SummerPop.csv", sep=",",
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
+Summer.Delay_Data <- read.csv("SummerPop.csv", header=TRUE)
 arrange(Summer.Delay_Data, desc(props))
 
 
@@ -107,6 +109,7 @@ write.table(Fall.Delay_Data, file="FallPop.csv", sep=",",
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
+Fall.Delay_Data <- read.csv("FallPop.csv", header=TRUE)
 arrange(Fall.Delay_Data, desc(props))
 
 ########################################################
@@ -131,4 +134,7 @@ explain(Origin_Year.Delay)
 Origin.Year_Data <- collect(Origin_Year.Delay)
 write.table(Origin.Year_Data, file="YearlyPop.csv", sep=",",
             col.names=TRUE)
+
+Origin.Year_Data <- read.csv("YearlyPop.csv", header=TRUE)
+arrange(Origin.Year_Data, desc(Year_mean))
 

@@ -35,3 +35,9 @@ collect(a)
 arrange(a, desc(prob))
 
 
+
+y <- summarise(group_by(flights, origin), ave = mean(depdelay))
+ave.delay <- collect(y)
+write.csv(ave.delay,"aveDelay.byAirport.csv")
+mean(ave.delay$ave)
+

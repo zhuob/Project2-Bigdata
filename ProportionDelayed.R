@@ -4,7 +4,8 @@ Depart.Delay1 <- flights %.%
 explain(Depart.Delay1)
 
 Prop.Delay <- Depart.Delay1 %.%
-  summarise(props = mean(as.integer(depdelay > 0)))
+  summarise(props = mean(as.integer(depdelay > 0)), 
+            mean.wait=mean(depdelay))
 explain(Prop.Delay)
   
 Prop.Delay_Data <- collect(Prop.Delay)
@@ -29,7 +30,8 @@ explain(Winter.Delay)
 
 #Creating the Proportions for Winter
 Prop.Delay_Winter <- Winter.Delay %.%
-  summarise(win.props = mean(as.integer(depdelay > 0)))
+  summarise(win.props = mean(as.integer(depdelay > 0)), 
+            mean.wait=mean(depdelay))
 explain(Prop.Delay_Winter)
 
 #Writing a CSV for Winter
@@ -53,7 +55,8 @@ explain(Spring.Delay)
 
 #Creating the Proportions for Spring
 Prop.Delay_Spring <- Spring.Delay %.%
-  summarise(props = mean(as.integer(depdelay > 0)))
+  summarise(props = mean(as.integer(depdelay > 0)), 
+            mean.wait=mean(depdelay))
 explain(Prop.Delay_Spring)
 
 #Writing a CSV for Spring
@@ -76,7 +79,8 @@ explain(Summer.Delay)
 
 #Creating the Proportions for Summer
 Prop.Delay_Summer <- Summer.Delay %.%
-  summarise(props = mean(as.integer(depdelay > 0)))
+  summarise(props = mean(as.integer(depdelay > 0)), 
+            mean.wait=mean(depdelay))
 explain(Prop.Delay_Summer)
 
 #Writing a CSV for Summer
@@ -100,7 +104,8 @@ explain(Fall.Delay)
 
 #Creating the Proportions for Fall
 Prop.Delay_Fall <- Fall.Delay %.%
-  summarise(props = mean(as.integer(depdelay > 0)))
+  summarise(props = mean(as.integer(depdelay > 0)), 
+            mean.wait=mean(depdelay))
 explain(Prop.Delay_Fall)
 
 #Writing a CSV for Fall

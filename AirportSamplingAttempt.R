@@ -42,6 +42,7 @@ origin_PMD = flights %.%
 explain(origin_PMD)
 
 sample= collect(head(origin_PMD, n=n.02_max))
+write.csv(sample, file="combinedSample.csv", row.names=FALSE)
 
 for(i in 2:num_02){
   airport=toString(origins_02[i])
@@ -52,7 +53,8 @@ for(i in 2:num_02){
   explain(origin)
   
   sample2=collect(head(origin, n=n.02_max))
-  sample= cbind(sample, sample2)
+  write.csv(sample2, file="sample2.csv", row.names=FALSE)
+  system("cat sample2.csv | sed "1 d" >> combinedSample.csv")
 }
 
 cbind(c(1,2

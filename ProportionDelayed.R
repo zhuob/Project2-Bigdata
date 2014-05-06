@@ -13,7 +13,18 @@ write.table(Prop.Delay_Data, file="PopPropMean.csv", sep=",",
             col.names=TRUE)
 Prop.Delay_Data = read.csv("PopPropMean.csv", header=TRUE)
 
-arrange(Prop.Delay_Data, desc(props))
+High.Props <- arrange(Prop.Delay_Data, desc(props))
+
+library(ggplot2)
+qplot(props, reorder(origin,props), data=High.Props[1:20,],
+      xlab="Proportion of Delayed Flights", ylab="Airport",
+      geom = "jitter",size = I(2))+
+  ggtitle("Proportion of Delayed Flights by Airport") 
+
+qplot(mean.wait, reorder(origin, props), data=High.Props[1:20,],
+      xlab="Mean Delay Time", ylab="Airport", geom="jitter",
+      size=I(2))+ggtitle("Mean Departure Delay Time of Flights
+                         by airport")
 
 ##########################################################
 # Accounting for Season by looking at Seasonal Data Sets #

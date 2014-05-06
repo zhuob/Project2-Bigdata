@@ -14,7 +14,7 @@ n.05 =  ceiling(((1.96^2)*(Prop.Delay_Data[,2]*(1-Prop.Delay_Data[,2])))/
 n.02 =  ceiling(((1.96^2)*(Prop.Delay_Data[,2]*(1-Prop.Delay_Data[,2])))/
                   (.02^2))
 sample.size_airport = cbind(Prop.Delay_Data, n.01, n.02, n.05)
-sample.size_airport
+write.csv(sample.size_airport, "NeedSampleSize.csv", row.names=FALSE)
 
 #That is the numbers we need for each airport. We can from here use 
 #the code that is necessary for each of the airports individually or

@@ -28,9 +28,15 @@ n.05_max = as.integer(max(n.05))
 # Trying a for loop with just the maximum number for an
 # error of .02 in proportion 
 ########################################################
-num.need_02 <- n.02_max/25
-Num.Flights_data <- read.csv("FlightNumber.csv", header=TRUE)
-Num.Flights_02 <- filter(Num.Flights_data, Avg_Num.flights > num.need_02)
+Num.flights_year <- flights %.%
+  select(origin) %.%
+  group_by(origin) %.%
+  summarise(flights=n()) 
+explain(Num.flights_year)
+Num.flights_data = collect(Num.flights_year)
+write.csv(Num.flights_data, "TotalFlights.csv", row.names=FALSE)
+
+Num.Flights_02 <- filter(Num.flights_data, flights > n.02_max)
 num_02 = length(Num.Flights_02[,2])
 
 origins_02 = Num.Flights_02[,1]

@@ -45,14 +45,17 @@ num_02 = length(Num.Flights_02[,2])
 write.csv(Num.Flights_02, file="Airports_to_Sample.csv", row.names=FALSE)
 
 origins_02 = Num.Flights_02[,1]
+ns_02 = Num.Flights_02[,7]
 
-origin_PMD = flights %.%
-  filter(origin=="PMD") %.%
+origin_1 = toString(origins_02[1])
+
+origin.1 = flights %.%
+  filter(origin==origin_1) %.%
   select(depdelay, month, year, origin) %.%
   arrange(random())
-explain(origin_PMD)
+explain(origin.1)
 
-sample= collect(head(origin_PMD, n=n.02_max))
+sample= collect(head(origin.1, n=as.integer(ns_02[1]))
 write.csv(sample, file="combinedSample.csv", row.names=FALSE)
 
 for(i in 2:num_02){
@@ -63,12 +66,14 @@ for(i in 2:num_02){
     arrange(random())
   explain(origin)
   
-  sample2=collect(head(origin, n=n.02_max))
+  n1 = as.integer(ns_02[i])
+  sample2=collect(head(origin, n=n1))
+  
   write.csv(sample2, file="sample2.csv", row.names=FALSE)
   system("cat sample2.csv | sed '1 d' >> combinedSample.csv")
 }
 
-cbind(c(1,2
+
 sample_data = data.frame(samples, col.names=origins_02)
 
 #####################################################################

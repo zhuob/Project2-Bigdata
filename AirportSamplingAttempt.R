@@ -51,6 +51,8 @@ write.csv(Num.Flights_02, file="Airports_to_Sample.csv", row.names=FALSE)
 
 Num.Flights_02=read.csv("Airports_to_Sample.csv", header=T)
 origins_02 = Num.Flights_02[,1]
+
+
 ns_02 = Num.Flights_02[,6]
 
 origin_1 = toString(origins_02[1])
@@ -65,6 +67,7 @@ n1=as.integer(ns_02[1])
 sample= collect(head(origin.1, n=n1))
 setwd("/home/zhuob/Project2-Bigdata/dataset/")
 
+sample= collect(head(origin.1, n=as.integer(ns_02[1]))
 write.csv(sample, file="combinedSample.csv", row.names=FALSE)
 
 
@@ -85,7 +88,6 @@ for(i in 2:length(ns_02)){
   system("rm sample2.csv")
 }
 
-dddd <- read.csv("combinedSample.csv", header=T)
 
 sample_data = data.frame(samples, col.names=origins_02)
 

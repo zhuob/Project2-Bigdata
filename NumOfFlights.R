@@ -44,7 +44,7 @@ write.table(samples, file="SampleNumbers.csv", sep=",",
 #Now Creating the Data Set from the samples
 ###########################################
 #January 
-Jan.days_prop <- flights %.%
+Jan.days <- flights %.%
   filter(month==1L & dayofmonth==25L | dayofmonth==10L |
            dayofmonth==6L | dayofmonth==8L | dayofmonth == 27L) %.%
   select(origin, depdelay) %.%

@@ -9,11 +9,22 @@ Prop.Delay <- Depart.Delay1 %.%
 explain(Prop.Delay)
   
 Prop.Delay_Data <- collect(Prop.Delay)
-write.table(Prop.Delay_Data, file="PopProp.csv", sep=",", 
+write.table(Prop.Delay_Data, file="PopPropMean.csv", sep=",", 
             col.names=TRUE)
-Prop.Delay_Data = read.csv("PopProp.csv", header=TRUE)
+Prop.Delay_Data = read.csv("PopPropMean.csv", header=TRUE)
 
-arrange(Prop.Delay_Data, desc(props))
+High.Props <- arrange(Prop.Delay_Data, desc(props))
+
+library(ggplot2)
+qplot(props, reorder(origin,props), data=High.Props[1:20,],
+      xlab="Proportion of Delayed Flights", ylab="Airport",
+      geom = "jitter",size = I(2))+
+  ggtitle("Proportion of Delayed Flights by Airport") 
+
+qplot(mean.wait, reorder(origin, props), data=High.Props[1:20,],
+      xlab="Mean Delay Time", ylab="Airport", geom="jitter",
+      size=I(2))+ggtitle("Mean Departure Delay Time of Flights
+                         by airport")
 
 ##########################################################
 # Accounting for Season by looking at Seasonal Data Sets #
@@ -36,11 +47,11 @@ explain(Prop.Delay_Winter)
 
 #Writing a CSV for Winter
 Winter.Delay_Data <- collect(Prop.Delay_Winter)
-write.table(Winter.Delay_Data, file="WinterPop.csv", sep=",", 
+write.table(Winter.Delay_Data, file="WinterPop2.csv", sep=",", 
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
-Winter.Delay_Data = read.csv("WinterPop.csv", header=TRUE)
+Winter.Delay_Data = read.csv("WinterPop2.csv", header=TRUE)
 arrange(Winter.Delay_Data, desc(win.props))
 
 
@@ -61,11 +72,11 @@ explain(Prop.Delay_Spring)
 
 #Writing a CSV for Spring
 Spring.Delay_Data <- collect(Prop.Delay_Spring)
-write.table(Spring.Delay_Data, file="SpringPop.csv", sep=",", 
+write.table(Spring.Delay_Data, file="SpringPop2.csv", sep=",", 
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
-Spring.Delay_Data <- read.csv("SpringPop.csv", header=TRUE)
+Spring.Delay_Data <- read.csv("SpringPop2.csv", header=TRUE)
 arrange(Spring.Delay_Data, desc(props))
 
 #Summer is considered June, July, and August
@@ -85,11 +96,11 @@ explain(Prop.Delay_Summer)
 
 #Writing a CSV for Summer
 Summer.Delay_Data <- collect(Prop.Delay_Summer)
-write.table(Summer.Delay_Data, file="SummerPop.csv", sep=",", 
+write.table(Summer.Delay_Data, file="SummerPop2.csv", sep=",", 
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
-Summer.Delay_Data <- read.csv("SummerPop.csv", header=TRUE)
+Summer.Delay_Data <- read.csv("SummerPop2.csv", header=TRUE)
 arrange(Summer.Delay_Data, desc(props))
 
 
@@ -110,11 +121,11 @@ explain(Prop.Delay_Fall)
 
 #Writing a CSV for Fall
 Fall.Delay_Data <- collect(Prop.Delay_Fall)
-write.table(Fall.Delay_Data, file="FallPop.csv", sep=",", 
+write.table(Fall.Delay_Data, file="FallPop2.csv", sep=",", 
             col.names=TRUE)
 
 #Arranging them to see which is the highest proportion
-Fall.Delay_Data <- read.csv("FallPop.csv", header=TRUE)
+Fall.Delay_Data <- read.csv("FallPop2.csv", header=TRUE)
 arrange(Fall.Delay_Data, desc(props))
 
 ########################################################

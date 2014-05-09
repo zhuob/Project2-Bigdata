@@ -31,7 +31,7 @@ rankDelay <- function(data, type ="pop", order = "ascending", num=10)
     
     else if(order == "descending"){
       spring <- head(data[order(-data[, 6]),c(1,6)], num)
-      summer <-  head(data[order(-data[, 7]),c(1,7)], num)
+      summer <- head(data[order(-data[, 7]),c(1,7)], num)
       fall <-  head(data[order(-data[, 8]),c(1,8)], num)
       winter <-  head(data[order(-data[, 9]),c(1,9)], num)  
     }

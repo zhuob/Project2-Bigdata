@@ -96,6 +96,14 @@ m <- ggplot(result, aes(x=p))
 scale_fill_gradient("Count", low = "green", high = "red")
 
 
+stat0 <- (result$prob-result$pop.spring)/result$sd
+result$p <- 2*(1-pnorm(abs(stat0)))
+mean(result$p <0.05)
+m <- ggplot(result, aes(x=p))
+  m + geom_histogram(aes(fill = ..count..), binwidth= 0.1) +
+scale_fill_gradient("Count", low = "green", high = "red")
+
+
 
 # result$inCI <- ifelse( (result[, 2]<= result[, 6]) & (result[, 2]>= result[, 5]),"Yes", "No")
 # result[which(result$inCI =="No"),]

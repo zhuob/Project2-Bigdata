@@ -8,6 +8,7 @@
 # entire country.
 
 library(dplyr)
+library(ggplot2)
 setwd( "/home/zhuob/Project2-Bigdata")
 
 spring <- read.csv("SpringPop.csv", header=T)
@@ -78,9 +79,20 @@ sprg <- ss$spr
 co <- conf.interv(alpha = 0.95, season="spring")
 result <- merge(sprg, co, by ="origin")
 ## creating a new column, indicating if our CI captures the population prop.
+head(result)
+# it's better to view p values
 
-result$inCI <- ifelse( (result[, 2]<= result[, 6]) & (result[, 2]<= result[, 6]),"Yes", "No")
-result[which(result$inCI =="No"),]
+stat0 <- (result$prob-result$pop.spring)/result$sd
+result$p <- 2*(1-pnorm(abs(stat0)))
+mean(result$p <0.05)
+m <- ggplot(result, aes(x=p))
+  m + geom_histogram(aes(fill = ..count..), binwidth= 0.1) +
+scale_fill_gradient("Count", low = "green", high = "red")
+
+
+
+# result$inCI <- ifelse( (result[, 2]<= result[, 6]) & (result[, 2]>= result[, 5]),"Yes", "No")
+# result[which(result$inCI =="No"),]
 
 ## probably you might noticed that CWA has both estimated prob and sd 0. That is
 ## because the estimate is truly 0, i.e. it never delays in spring. 
@@ -96,13 +108,23 @@ result[which(result$inCI =="No"),]
 
 year.pop <- read.csv("PopProp.csv", header=T)[-3]
 head(year.pop)
-co1 <- conf.interv(alpha=0.95, season="all")
+co1 <- conf.interv(alpha=0.90, season="all")
+head(co1)
 sampVsPopu <- merge(year.pop, co1, by="origin")
-sampVsPopu$inCI <- ifelse( (sampVsPopu[, 2]<= sampVsPopu[, 6]) & 
-                            (sampVsPopu[, 2]<= sampVsPopu[, 6]),"Yes", "No")
+colnames(sampVsPopu)[c(2:3)] <- c("popu.p", "samp.p")
+
+#sampVsPopu$inCI <- ifelse( (sampVsPopu[, 2]<= sampVsPopu[, 6]) & 
+#                            (sampVsPopu[, 2]>= sampVsPopu[, 5]),"Yes", "No")
 
 # the following gives you the type I error rate
-sum(sampVsPopu$inCI =="No")/dim(sampVsPopu)[1] # 0.04126984
+# sum(sampVsPopu$inCI =="No")/dim(sampVsPopu)[1] # 0.04126984
 # might be a bit conservative, but good enough. 
 
+
+stat <- (sampVsPopu$samp.p-sampVsPopu$popu.p)/(sampVsPopu$sd)
+sampVsPopu$p <- 2*(1-pnorm(abs(stat)))
+mean(sampVsPopu$p<0.1)
+# the p value looks uniform
+m <- ggplot(sampVsPopu, aes(x=p))
+  m + geom_histogram(aes(fill = ..count..), binwidth= 0.1) 
 

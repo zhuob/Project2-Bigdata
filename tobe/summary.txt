@@ -1,0 +1,45 @@
+
+delay >0
+
+
+
+Call:
+lm(formula = airports$props ~ log(airports$Avg_Num.flights))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.21773 -0.04947 -0.00096  0.03808  0.32017 
+
+Coefficients:
+                              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                   0.155740   0.018219   8.548 3.47e-16 ***
+log(airports$Avg_Num.flights) 0.019199   0.002225   8.627  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.07785 on 365 degrees of freedom
+Multiple R-squared:  0.1694,	Adjusted R-squared:  0.1671 
+F-statistic: 74.42 on 1 and 365 DF,  p-value: < 2.2e-16
+
+
+
+
+delay >4
+
+Call:
+lm(formula = airports$prob ~ log(airports$Avg_Num.flights))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.17745 -0.03699 -0.00493  0.02535  0.32029 
+
+Coefficients:
+                              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                   0.165052   0.016089  10.259  < 2e-16 ***
+log(airports$Avg_Num.flights) 0.008348   0.001965   4.248 2.74e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.06875 on 365 degrees of freedom
+Multiple R-squared:  0.0471,	Adjusted R-squared:  0.04449 
+F-statistic: 18.04 on 1 and 365 DF,  p-value: 2.744e-05
